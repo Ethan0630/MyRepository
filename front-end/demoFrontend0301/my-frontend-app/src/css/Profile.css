@@ -1,0 +1,92 @@
+.profile-circle {
+    width: 10vw;
+    /* 使用視口寬度的 10% */
+    height: 10vw;
+    /* 高度與寬度相同，保持正方形 */
+    max-width: 120px;
+    /* 最大寬度限制 */
+    max-height: 120px;
+    /* 最大高度限制 */
+    border-radius: 50%;
+    /* 讓它變圓 */
+    background-color: rgb(255, 255, 255);
+    /* 橘色框框 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* 確保圖片不超出圓形 */
+    border: 4px solid #dddbd9;
+    /* 添加邊框 */
+    /* margin-left: 50px;
+  margin-top: 10px; */
+    margin: 20px auto;
+}
+
+.profile-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 確保圖片填滿圓形，不變形 */
+    border-radius: 50%;
+    /* 讓圖片也是圓形 */
+}
+
+.profile-name {
+    font-size: 25px;
+    /* display: flex; */
+    align-items: center;
+    /* padding-left: 5%; */
+    margin: 10px auto;
+    width: 90%;
+}
+
+
+.profile {
+    display: flex;
+    align-items: center;
+    /* 讓圖示和文字垂直置中 */
+    gap: 20px;
+    /* 圖示與文字之間的間距 */
+    padding-left: 5%;
+    margin-left: 20%;
+    font-size: 18px;
+}
+
+.education {
+    display: flex;
+    align-items: center;
+    /* 讓圖示和文字垂直置中 */
+    gap: 15px;
+    /* 圖示與文字之間的間距 */
+    padding-left: 5%;
+    margin-left: 19%;
+    font-size: 18px;
+}
+
+/* 📱 小螢幕（小於 768px）時的樣式 */
+@media (max-width: 768px) {
+
+    .profile {
+        margin-left: 5px;
+        font-size: 16px;
+    }
+
+    .education {
+        margin-left: 3px;
+        font-size: 16px;
+    }
+}
+
+
+#sns a {
+    display: block;
+    /* 讓超連結變成區塊元素 */
+    text-decoration: none;
+    /* 移除底線 */
+
+}
+
+#profile-sns {
+    margin-top: 10px;
+}

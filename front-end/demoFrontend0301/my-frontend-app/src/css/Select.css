@@ -1,0 +1,72 @@
+#word {
+    width: 100%;
+    font-size: 20px;
+    height: 20px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+#word h3 {
+    margin: 0 auto;
+}
+
+.filter-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 垂直置中 */
+    gap: 25px;
+    /* 控制兩個選單的間距 */
+    padding: 0 10px;
+    /* width: 100%; */
+}
+
+.refresh-container {
+    margin-right: 10px;
+}
+
+#industryContainer {
+    display: flex;
+    align-items: center;
+    /* margin-left: -15%; */
+    width: 55%;
+}
+
+#categoryContainer {
+    display: flex;
+    align-items: center;
+    /* margin-left: -15%; */
+    width: 55%;
+}
+
+/* 更新按鈕 (refresh icon) */
+.refresh-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgb(11, 203, 104);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-right: 10px;
+}
+
+/* 旋轉效果 */
+.refresh-container:hover {
+    transform: rotate(360deg);
+}
+
+/* 圖示設定 */
+/* .refresh-icon {
+    color: black;
+    font-size: 20px;
+} */
+
+.filter-controls select {
+    font-size: 14px;
+    padding: 6px 10px;
+    border-radius: 6px;
+}

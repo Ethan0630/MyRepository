@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile_Pic</title>
+    <link href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' rel='stylesheet'>
+    </link>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    </link>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css" rel="stylesheet">
+    </link>
+    <link rel="stylesheet" href="css/ProfilePic.css">
+</head>
+
+<body>
+    <div class="button-container">
+        <label class="btn btn-info">
+            <input id="upload_img" style="display:none;" type="file" accept="image/*">
+            <i class="fa fa-photo"></i> 上傳圖片</label>
+    </div>
+
+    <div id="oldImg" style="display:none;"></div>
+    <div class="button-container">
+        <button id="crop_img" class="btn btn-info"><i class="fa fa-scissors"></i> 裁剪圖片</button>
+    </div>
+
+    <div id="newImgInfo"></div>
+    <div id="newImg"></div>
+
+    <div class="button-container">
+        <button id="confirm_upload" class="btn btn-info" onclick="uploadImage()"><i class="fa fa-scissors"></i>
+            確認上傳</button>
+    </div>
+
+    <script src="js/ProfilePic.js"></script>
+</body>
+
+</html>

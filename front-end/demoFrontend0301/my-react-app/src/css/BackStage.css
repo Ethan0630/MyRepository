@@ -1,0 +1,80 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body,
+#root,
+#root-container {
+    width: 100%;
+    height: 100%;
+}
+
+#main-container {
+    width: 90%;
+    height: 600px;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 0px;
+
+
+}
+
+#left-container {
+    width: 20%;
+    height: 100%;
+    background-color: rgb(180, 255, 31);
+    padding: 10px;
+    /* 避免文字貼邊 */
+    margin-right: 2%;
+    border-radius: 8px;
+    padding-top: 5%;
+}
+
+#left-container a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 22px;
+}
+
+#right-container {
+    width: 78%;
+    height: 100%;
+    /* 確保最小高度至少是整個畫面 */
+    background-color: rgb(249, 239, 43);
+    display: flex;
+    flex-direction: column;
+    /* 讓內部內容自然撐開 */
+    align-items: stretch;
+    /* 確保內部元件可以充滿 */
+    border-radius: 8px;
+}
+
+/* 小螢幕時*/
+@media screen and (max-width: 992px) {
+    #left-container a {
+        font-size: 16px;
+    }
+}
+
+#pig-container {
+    display: flex;
+    justify-content: center;
+    /* 水平置中 */
+    align-items: center;
+    /* 垂直置中 */
+    height: 200px;
+    /* 你可以根據需要調整高度 */
+    background-color: #f3e2e2;
+    /* 可以讓背景清楚區分 */
+    width: 90%;
+    margin: 0 auto;
+
+}
+
+#pigImg {
+    cursor: pointer;
+}

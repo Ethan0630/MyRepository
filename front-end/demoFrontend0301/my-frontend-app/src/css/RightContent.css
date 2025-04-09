@@ -1,0 +1,44 @@
+/* 上方 20px 高的綠色條 */
+.top-green-bar {
+    background-color: #e9fb9f;
+    /* 綠色背景 */
+    height: 100px;
+    /* 調整高度 */
+    width: 100%;
+    /* 與紅色區塊寬度相同 */
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 置中對齊（水平） */
+    justify-content: center;
+    /* 垂直置中 */
+    /* 垂直排列 */
+    border-radius: 8px;
+    /* 左右分散 */
+    /* justify-content: flex-end; */
+    /* 讓內容靠右 */
+}
+
+/* 右側主要內容（紅色） */
+.right-content {
+    background: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    height: 850px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    /* justify-content: flex-start; */
+    /* gap: 0px; */
+    /* 讓上方內容和下方 pagination 拉開距離 */
+    /* min-height: 500px; */
+    /* 可以自行設定一個最小高度，讓頁籤不會浮起來 */
+    padding: 20px 20px 0 20px;
+    border-radius: 8px;
+}
+
+@media screen and (max-width: 992px) {
+    .right-content {
+        height: 480px;
+    }
+}

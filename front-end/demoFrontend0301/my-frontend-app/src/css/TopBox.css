@@ -1,0 +1,37 @@
+.TopBox {
+    background: #f8f9fa;
+    /* 淺灰色背景 */
+    border-radius: 10px;
+    /* 圓角 */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    /* 添加陰影 */
+    border: 1px solid rgb(45, 26, 2);
+    margin-bottom: 15px;
+    max-height: 210px;
+    /* position: fixed; */
+    /* 固定位置 */
+    top: 0;
+    /* 距離頁面頂部 0px */
+    width: 90%;
+    margin: 0 auto;
+    /* 讓 div 水平置中 */
+    overflow: hidden;
+    /* ✅ 防止圖片超出 */
+    padding: 3px;
+    /* ✅ 添加內距，避免圖片緊貼邊框 */
+
+}
+
+.TopBox img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+/* 📱 小螢幕（小於 768px）時的樣式 */
+@media (max-width: 768px) {
+    .TopBox {
+        height: 110px;
+        /* 比較小的高度 */
+    }
+}

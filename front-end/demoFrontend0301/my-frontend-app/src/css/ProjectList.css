@@ -1,0 +1,180 @@
+/* 在 CSS 檔案中加這個 class */
+body.modal-open {
+    overflow: hidden;
+}
+
+.square-container {
+    display: flex;
+    justify-content: flex-start;
+    /* 讓 3 個方塊平均分布 */
+    gap: 12px;
+    /* 控制間距 */
+    flex-wrap: wrap;
+    /* 允許換行 */
+    margin-bottom: 0;
+    padding-bottom: 0;
+
+}
+
+.square {
+    width: calc(33.33% - 10px);
+    /* ✅ 每行最多 3 個 */
+    /* 確保 3 個正方形佔滿整行 */
+    padding-top: 30%;
+    /* 讓寬高相等 */
+    background-color: #ffffff;
+    border-radius: 5px;
+    position: relative;
+    /* 讓內部 `img` 可以使用 `absolute` 定位 */
+    overflow: hidden;
+    /* 防止超出 */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    /* 添加陰影 */
+    margin-bottom: 10px;
+}
+
+.square img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* 讓圖片置中 */
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* 確保圖片填滿，但不變形 */
+    border-radius: 5px;
+    /* 讓圖片跟 `.square` 一樣圓角 */
+}
+
+
+/* 小螢幕時變 2 個一排 */
+@media screen and (max-width: 992px) {
+    .square {
+        width: calc(50% - 10px);
+        /* ✅ 讓它變成 2 個一排 */
+    }
+
+    .lightbox-content img {
+        min-width: 500px;
+    }
+
+    .lightbox-content {
+        min-width: 700px;
+    }
+}
+
+@media screen and (min-width: 993px) {
+    .lightbox-content {
+        min-width: 700px;
+    }
+
+    .lightbox-content img {
+        min-width: 500px;
+    }
+}
+
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    z-index: 998;
+    overflow: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.lightbox-content {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 50px;
+    /* ⬅️ 加這行來增加底部空間 */
+
+}
+
+.lightbox-content img {
+    /* display: block; */
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 8px;
+    margin-top: 5%;
+    object-fit: contain;
+
+    /* width: clamp(614px, 80vw, 1229px); */
+    /* 📌 寬度自適應最小614px、最大1229px */
+    /* height: clamp(439px, 80vh, 879px); */
+    /* 📌 高度自適應最小439px、最大879px */
+}
+
+/* ✅ 叉叉按鈕 */
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    color: #ffffff;
+    font-size: 30px;
+    border: none;
+    cursor: pointer;
+}
+
+#des-box {
+    width: 80%;
+    height: 150px;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 5%;
+    border-radius: 5px;
+    min-width: 613px;
+}
+
+#des-box p {
+    font-size: 20px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    /* 將 pagination 推到底 */
+    margin-bottom: 10px;
+    /* ⬅️ 這行讓它跟底部保留距離 */
+    gap: 5px;
+}
+
+.index {
+    margin: 0 5px;
+    padding: 6px 12px;
+    border: none;
+    background-color: #eee;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.index-active {
+    margin: 0 5px;
+    padding: 6px 12px;
+    border: none;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: #a29898;
+    cursor: pointer;
+}

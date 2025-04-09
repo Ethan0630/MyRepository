@@ -1,0 +1,112 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.box {
+  background: #f8f9fa;
+  /* 淺灰色背景 */
+  border-radius: 10px;
+  /* 圓角 */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  /* 添加陰影 */
+  border: 1px solid rgb(45, 26, 2);
+  margin-bottom: 15px;
+  height: 250px;
+  /* position: fixed; */
+  /* 固定位置 */
+  top: 0;
+  /* 距離頁面頂部 0px */
+  width: 90%;
+  margin: 0 auto;
+  /* 讓 div 水平置中 */
+
+  padding: 5px;
+  /* ✅ 添加內距，避免圖片緊貼邊框 */
+  height: auto;
+  /* ✅ 讓父容器隨圖片大小調整 */
+
+}
+
+
+/* 左側 30% 長條區塊 */
+.left-bar {
+  background-color: #e2f8ec;
+  /* 藍色背景 */
+  border-radius: 10px;
+  /* 圓角 */
+  width: 30%;
+  /* 預設佔 30% */
+  height: 980px;
+  /* 確保高度 */
+}
+
+
+/* 右側區塊的外框 */
+.right-content-wrapper {
+  width: 100%;
+  /* 右側佔 70% */
+  margin-left: 2%;
+}
+
+
+
+
+/* 讓左右兩個 div 能對齊 */
+.d-flex {
+  display: flex;
+}
+
+#mainContainer {
+  margin-top: 2%;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 992px) {
+  .left-bar {
+    height: 610px;
+  }
+}

@@ -1,0 +1,98 @@
+.drop-area {
+    width: calc(100% - 20px);
+    /* 🔥 減少 20px，確保兩側各留 10px */
+    height: 250px;
+    background-color: rgb(62, 213, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: "hidden";
+    box-sizing: border-box;
+    margin: 10px;
+    /* 🔥 外邊距，讓 `.drop-area` 與父元素四周留 10px */
+    flex-direction: column;
+
+}
+
+.file-input {
+    display: none;
+}
+
+.preview-image {
+    max-width: 100%;
+    /* 限制圖片的最大寬度 */
+    max-height: 100%;
+    /* 讓圖片不超過容器的高度 */
+    width: auto;
+    /* 讓瀏覽器自動計算寬度，確保等比例 */
+    height: auto;
+    /* 讓瀏覽器自動計算高度，確保等比例 */
+    object-fit: contain;
+    /* 保持完整圖片，防止裁剪 */
+    display: block;
+    /* 避免 inline 元素造成間距 */
+    margin: auto;
+    /* 讓圖片水平置中 */
+}
+
+.title-container {
+    position: relative;
+    /* 讓子元素能夠使用 `absolute` */
+    text-align: center;
+    /* 讓 h2 水平置中 */
+    width: 100%;
+    padding: 10px 0;
+    /* 增加上下間距 */
+    margin-top: 3px;
+}
+
+.title-container h2 {
+    font-size: 26px;
+    /* 🔥 調整圖示大小，數值可自行修改 */
+    margin: 0;
+    display: inline-block;
+    /* 讓 h2 內容置中 */
+    pointer-events: none;
+    /* 禁止所有滑鼠事件 */
+}
+
+.title-container i {
+    position: absolute;
+    right: 5%;
+    /* 讓 i 標籤固定在右側 */
+    top: 50%;
+    transform: translateY(-50%);
+    /* 讓 i 垂直置中 */
+    cursor: pointer;
+    /* 讓鼠標變成可點擊 */
+    font-size: 24px;
+    /* 🔥 調整圖示大小，數值可自行修改 */
+}
+
+.img-container {
+    width: 100%;
+    /* 讓圖片容器填滿父級容器 */
+    height: 100%;
+    border: 2px dashed white;
+    /* 設定為白色的虛線框 */
+    display: flex;
+    /* 讓內容可以水平與垂直居中 */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* 防止內容溢出 */
+    background-color: rgba(0, 0, 0, 0.05);
+    /* 可加可不加，讓圖片區塊更明顯 */
+}
+
+.img-container.has-image {
+    border: none;
+    /* 有圖片時移除框線 */
+}
+
+.banner-container {
+    max-height: 100%;
+    overflow-y: auto;
+}

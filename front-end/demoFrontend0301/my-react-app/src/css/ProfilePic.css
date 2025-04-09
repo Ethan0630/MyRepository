@@ -1,0 +1,70 @@
+/* 設定整個頁面樣式 */
+#profilePicContainer {
+    /* max-width: 60%; */
+    width: 90%;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    overflow-y: auto;
+    /* ✅ 允許垂直滾動 */
+}
+
+
+#newImgInfo {
+    display: none;
+}
+
+.img-info {
+    font-size: 18px;
+    margin-top: 10px;
+    text-align: center;
+    /* ✅ 讓文字水平置中 */
+}
+
+/* #confirm_upload,
+#crop_img {
+    display: none;
+    margin-top: 10px;
+} */
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    /* 🔥 水平置中 */
+    align-items: center;
+    /* ⬆️ 垂直置中 (可選) */
+    width: 100%;
+    /* 讓它充滿父容器 */
+    margin-top: 10px;
+    /* 增加與上方內容的間距 */
+}
+
+#newImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    /* 確保佔滿父容器 */
+    text-align: center;
+}
+
+.btn {
+    width: 50%;
+}
+
+#profilePicTitle {
+    background-color: #d6f897;
+    margin: 10px auto;
+    display: flex;
+    /* 讓內容可以水平與垂直居中 */
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+}
+
+.button-container span {
+    margin-left: 8px;
+}
