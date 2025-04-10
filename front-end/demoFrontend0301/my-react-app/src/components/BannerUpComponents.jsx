@@ -28,7 +28,7 @@ const BannerUpComponent = () => {
 
     const fetchBanners = async () => {
         try {
-            const response = await fetch("http://54.199.36.194:9060/banner/getBanners");
+            const response = await fetch("http://3.113.186.54:9060/banner/getBanners");
             const data = await response.json();
 
             if (Array.isArray(data)) {

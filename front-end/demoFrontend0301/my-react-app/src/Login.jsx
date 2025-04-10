@@ -8,7 +8,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleLogin = async () => {
-        const response = await fetch("http://54.199.36.194:9060/member/loginCheck", {
+        const response = await fetch("http://3.113.186.54:9060/member/loginCheck", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -26,7 +26,7 @@ const Login = () => {
     };
 
     const generate = () => {
-        fetch("http://54.199.36.194:9060/member/generate")
+        fetch("http://3.113.186.54:9060/member/generate")
             .then(response => {
                 if (response.ok) {
                     alert("資料已產生！");

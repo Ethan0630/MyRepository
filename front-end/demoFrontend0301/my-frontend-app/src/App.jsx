@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     const getBackImg = async () => {
-      const response = await fetch("http://54.199.36.194:9060/background/getBackgroundImg");
+      const response = await fetch("http://3.113.186.54:9060/background/getBackgroundImg");
       const data = await response.json();
       setBackgroundImg(data.base64Img1); // 👈 設定背景 base64
       document.body.style.backgroundImage = `url(${data.base64Img1})`;
