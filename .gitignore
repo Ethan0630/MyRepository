@@ -49,3 +49,6 @@ coverage/
 
 # local 開發 server cache
 .cache/
+
+!build/libs/*.jar
+
