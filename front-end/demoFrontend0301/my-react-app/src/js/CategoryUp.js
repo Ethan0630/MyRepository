@@ -1,6 +1,6 @@
 export const fetchCategories = async () => {
     try {
-        const response = await fetch("http://localhost:9060/cat/getCategories");
+        const response = await fetch("http://54.199.36.194:9060/cat/getCategories");
         if (!response.ok) throw new Error("獲取類別失敗");
         return await response.json(); // ✅ 確保回傳 Promise
     } catch (error) {
@@ -24,7 +24,7 @@ export const uploadCategory = async (categoryName) => {
         const formData = new FormData();
         formData.append("category", categoryName); // ✅ 確保符合 `@RequestParam("category")`
 
-        const response = await fetch("http://localhost:9060/admin/cat/upload", {
+        const response = await fetch("http://54.199.36.194:9060/admin/cat/upload", {
             method: "POST",
             headers: {
                 // ✅ 關鍵：要帶上 token！
@@ -67,7 +67,7 @@ export const deleteCategory = async (selectedCategory) => {
             alert("尚未登入，請先登入！\n或點擊上面那隻胖胖的豬豬");
             return "unauthorized";
         }
-        const response = await fetch(`http://localhost:9060/admin/cat/delete/${selectedCategory}`, {
+        const response = await fetch(`http://54.199.36.194:9060/admin/cat/delete/${selectedCategory}`, {
             method: "DELETE",
             headers: {
                 // ✅ 關鍵：要帶上 token！

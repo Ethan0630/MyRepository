@@ -6,7 +6,7 @@
 //         formData.append("image", image);
 //         formData.append("description", description);
 
-//         const response = await fetch("http://localhost:9060/pic/upload", {
+//         const response = await fetch("http://54.199.36.194:9060/pic/upload", {
 //             method: "POST",
 //             body: formData
 //         });

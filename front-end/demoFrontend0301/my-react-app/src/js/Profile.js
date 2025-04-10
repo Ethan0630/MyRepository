@@ -1,7 +1,7 @@
 
 export const fetchProfile = async () => {
     try {
-        const response = await fetch("http://localhost:9060/profile/getProfile");
+        const response = await fetch("http://54.199.36.194:9060/profile/getProfile");
         if (!response.ok) throw new Error("個人資料讀取錯誤");
         return await response.json();
     } catch (error) {
@@ -19,7 +19,7 @@ export const uploadProfile = async (profile) => {
             alert("尚未登入，請先登入！\n或點擊上面那隻胖胖的豬豬");
             return "unauthorized";
         }
-        const response = await fetch("http://localhost:9060/admin/profile/uploadProfile", {
+        const response = await fetch("http://54.199.36.194:9060/admin/profile/uploadProfile", {
             method: "PUT",  // 設定為 PUT，符合後端的 @PutMapping
             headers: {
                 // ✅ 關鍵：要帶上 token！

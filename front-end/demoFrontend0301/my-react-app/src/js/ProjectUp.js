@@ -20,7 +20,7 @@ export const uploadProject = async (name, selectedIndustry, selectedCategory, fi
         });
 
 
-        const response = await fetch("http://localhost:9060/admin/project/upload", {
+        const response = await fetch("http://54.199.36.194:9060/admin/project/upload", {
             method: "POST",
             headers: {
                 // ✅ 關鍵：要帶上 token！
@@ -71,7 +71,7 @@ export const updateProject = async (selectedId, selectedIndustry, selectedCatego
         });
 
 
-        const response = await fetch("http://localhost:9060/admin/project/update", {
+        const response = await fetch("http://54.199.36.194:9060/admin/project/update", {
             method: "PUT",
             headers: {
                 // ✅ 關鍵：要帶上 token！
@@ -100,7 +100,7 @@ export const updateProject = async (selectedId, selectedIndustry, selectedCatego
 };
 
 export const fetchProjectName = async () => {
-    const response = await fetch("http://localhost:9060/project/getAllName")
+    const response = await fetch("http://54.199.36.194:9060/project/getAllName")
 
     if (!response.ok) {
         throw new Error("獲取失敗！");
@@ -110,7 +110,7 @@ export const fetchProjectName = async () => {
 
 export const fetchProjectById = async (selectedId) => {
 
-    const response = await fetch(`http://localhost:9060/project/getProjectById?id=${selectedId}`);
+    const response = await fetch(`http://54.199.36.194:9060/project/getProjectById?id=${selectedId}`);
     if (!response.ok) {
         throw new Error("獲取失敗！");
     }
@@ -128,7 +128,7 @@ export const deleteProjectById = async (selectedId) => {
             alert("尚未登入，請先登入！\n或點擊上面那隻胖胖的豬豬");
             return "unauthorized";
         }
-        const response = await fetch(`http://localhost:9060/admin/project/delete?id=${selectedId}`, {
+        const response = await fetch(`http://54.199.36.194:9060/admin/project/delete?id=${selectedId}`, {
             method: "DELETE",
             headers: {
                 // ✅ 關鍵：要帶上 token！
