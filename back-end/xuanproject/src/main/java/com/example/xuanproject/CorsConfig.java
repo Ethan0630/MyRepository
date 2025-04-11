@@ -20,8 +20,9 @@ public class CorsConfig {
         config.setAllowCredentials(true); // 允許帶上 Cookie
         config.setAllowedOrigins(Arrays.asList(
             "http://127.0.0.1:5500", "http://localhost:5050",
-                "http://localhost:3000", "http://localhost:5000", 
-                "http://localhost:3001",
+                "http://localhost:3000", "http://localhost:5000",
+                "http://localhost:5001", "http://localhost:3001",
+                "http://localhost:3002",
                 "http://xuan-project-2025.s3-website-ap-northeast-1.amazonaws.com",
                 "http://xuan-project-backstage-2025.s3-website-ap-northeast-1.amazonaws.com")); // 設定允許的前端來源
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS")); // 允許的 HTTP 方法

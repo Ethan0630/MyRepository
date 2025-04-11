@@ -19,7 +19,7 @@ export const uploadBanner = async (file1, file2, file3) => {
             }
         });
 
-        const response = await fetch("http://3.113.186.54:9060/admin/banner/upload", {
+        const response = await fetch("http://13.115.110.126:9060/admin/banner/upload", {
             method: "PUT",
             headers: {
                 // ✅ 關鍵：要帶上 token！

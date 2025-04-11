@@ -13,7 +13,7 @@ export const uploadImage = async (imageBlob) => {
         const formData = new FormData();
         formData.append("image", imageBlob);
 
-        const response = await fetch("http://3.113.186.54:9060/admin/profile/uploadImg", {
+        const response = await fetch("http://13.115.110.126:9060/admin/profile/uploadImg", {
             method: "PUT",
             headers: {
                 // ✅ 關鍵：要帶上 token！

@@ -19,7 +19,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://3.113.186.54:9060/pig/gif") // 請確認這是你的後端 URL
+    fetch("http://13.115.110.126:9060/pig/gif") // 請確認這是你的後端 URL
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

@@ -1,6 +1,6 @@
 export const fetchIndustry = async () => {
     try {
-        const response = await fetch("http://3.113.186.54:9060/idt/getIndustry");
+        const response = await fetch("http://13.115.110.126:9060/idt/getIndustry");
         if (!response.ok) throw new Error("獲取類別失敗");
         return await response.json(); // ✅ 確保回傳 Promise
     } catch (error) {
@@ -24,7 +24,7 @@ export const uploadIndustry = async (industryName) => {
         const formData = new FormData();
         formData.append("industryName", industryName); // ✅ 確保符合 `@RequestParam("category")`
 
-        const response = await fetch("http://3.113.186.54:9060/admin/idt/upload", {
+        const response = await fetch("http://13.115.110.126:9060/admin/idt/upload", {
             method: "POST",
             headers: {
                 // ✅ 關鍵：要帶上 token！
@@ -68,7 +68,7 @@ export const deleteIndustry = async (selectedIndustry) => {
             alert("尚未登入，請先登入！\n或點擊上面那隻胖胖的豬豬");
             return "unauthorized";
         }
-        const response = await fetch(`http://3.113.186.54:9060/admin/idt/delete/${selectedIndustry}`, {
+        const response = await fetch(`http://13.115.110.126:9060/admin/idt/delete/${selectedIndustry}`, {
             method: "DELETE",
             headers: {
                 // ✅ 關鍵：要帶上 token！

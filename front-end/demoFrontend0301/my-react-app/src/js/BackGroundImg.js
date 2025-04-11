@@ -12,7 +12,7 @@ export const uploadBackImg = async (file) => {
     formData.append("image", file);
 
 
-    const response = await fetch("http://3.113.186.54:9060/admin/backImg/upload", {
+    const response = await fetch("http://13.115.110.126:9060/admin/backImg/upload", {
         method: "POST",
         headers: {
             // ✅ 關鍵：要帶上 token！
@@ -39,7 +39,7 @@ export const uploadBackImg = async (file) => {
 
 export const fetchBackImg = async () => {
 
-    const response = await fetch("http://3.113.186.54:9060/background/getBackgroundImg")
+    const response = await fetch("http://13.115.110.126:9060/background/getBackgroundImg")
     if (!response.ok) {
         throw new Error("獲取失敗！");
     }
