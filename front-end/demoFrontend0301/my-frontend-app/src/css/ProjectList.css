@@ -213,6 +213,18 @@ body.modal-open {
         max-width: 300px;
         min-width: 300px;
     }
+
+    .pagination{
+        gap:1px;
+    }
+
+    .index{
+        margin: 2px;
+    }
+
+    .index-active{
+        margin: 0px;
+    }
 }
 
 
