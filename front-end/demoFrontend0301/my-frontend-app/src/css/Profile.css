@@ -78,6 +78,25 @@
     }
 }
 
+@media (max-width: 480px) {
+    .profile-name {
+        font-size: 18px;
+    }
+
+    .profile {
+        font-size: 12px;
+        margin-left: 5px;
+        gap: 5px;
+    }
+    
+    .education{
+        margin-left: 2px;
+        font-size: 10px;
+        gap: 5px;
+    }
+}
+
+
 
 #sns a {
     display: block;
