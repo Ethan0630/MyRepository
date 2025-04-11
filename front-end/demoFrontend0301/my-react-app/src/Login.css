@@ -24,10 +24,12 @@ body {
     margin: 0;
 }
 
-#title i {
-    margin-right: 8px;
-    color: #ff5722;
+.piggy-icon {
+    font-size: 25px;
+    margin-right: 5px;
+    color: rgb(254, 0, 55);
 }
+  
 
 .container {
     text-align: center;
@@ -35,12 +37,13 @@ body {
 }
 
 .container input {
-    width: 80%;
+    width: 70%;
     padding: 8px;
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-top: 5px;
+    margin-left: 5px;
 }
 
 .login-button {
