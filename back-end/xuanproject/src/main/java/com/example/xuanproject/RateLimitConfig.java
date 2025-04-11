@@ -15,7 +15,7 @@ public class RateLimitConfig {
     public Bucket bucket() {
         // 限制每分鐘最多100次呼叫
         return Bucket.builder()
-                .addLimit(Bandwidth.classic(100, Refill.intervally(100, Duration.ofMinutes(1))))
+                .addLimit(Bandwidth.classic(50, Refill.intervally(100, Duration.ofMinutes(1))))
                 .build();
     }
 }
