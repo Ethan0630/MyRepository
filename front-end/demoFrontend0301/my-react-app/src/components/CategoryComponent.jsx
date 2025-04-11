@@ -85,7 +85,7 @@ const CategoryManagement = () => {
                 <h3>刪除類別</h3>
                 <label htmlFor="newCategory">目前所有類別：</label>
                 <select className="all" id="categorySelect-D" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
-                    <option value="">下拉查看類別</option>
+                    <option value="">下拉查看所有類別</option>
                     {categories.map((category) => (
                         <option key={category.id} value={category.id}>
                             {category.categoryName}

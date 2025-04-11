@@ -21,3 +21,10 @@ label {
     display: block;
     margin: 10px 0 5px;
 }
+
+/* 小螢幕時*/
+@media (max-width: 992px){
+    #ProfileComponent{
+        width: 85%;
+    }
+}

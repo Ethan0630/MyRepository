@@ -59,3 +59,10 @@
     background-color: rgb(245, 174, 68);
     /* ✅ 背景色 */
 }
+
+/* 小螢幕時*/
+@media (max-width: 992px){
+    #backGroundImg {
+        width: 90%;
+    }
+}

@@ -37,7 +37,7 @@ const Profile = () => {
             <div className="profile-name">
                 <p>{name || "請輸入姓名"}</p>
             </div>
-            <div className="profile">
+            <div className="profile" id="profile-occupation">
                 <FontAwesomeIcon icon={faUserDoctor} />
                 <p>{occupation || "請輸入職業"}</p>
             </div>
@@ -45,7 +45,7 @@ const Profile = () => {
                 <FontAwesomeIcon icon={faSchool} />
                 <p>{education || "請輸入學歷"}</p>
             </div>
-            <div className="profile">
+            <div className="profile" id="region">
                 <FontAwesomeIcon icon={faLocationDot} />
                 <p>{region || "請輸入地區"}</p>
             </div>

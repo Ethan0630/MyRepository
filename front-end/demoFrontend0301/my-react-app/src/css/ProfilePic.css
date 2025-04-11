@@ -68,3 +68,27 @@
 .button-container span {
     margin-left: 8px;
 }
+
+@media (max-width: 480px){
+    #profilePicContainer{
+        margin-top: 8px;
+    }
+    #profilePicTitle{
+        width: 100%;
+    }
+    #profilePicTitle h2{
+        font-size: 14px;
+    }
+    .button-container {
+        width: 100%;
+        /* 讓它充滿父容器 */
+        margin-top: 5px;
+        /* 增加與上方內容的間距 */
+    }
+
+    .btn {
+        font-size: 15px;
+        width: 50%;
+        height: 40px;
+    }
+}

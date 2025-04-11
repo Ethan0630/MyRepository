@@ -1,6 +1,7 @@
 package com.example.xuanproject.project.model;
 
 import java.util.Base64;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,6 +96,9 @@ public class ProjectService {
             }
 
         }
+
+        // 反轉列表順序：資料庫最後一筆會變成第一筆
+        Collections.reverse(ProjectList);
 
         return ProjectList;
     }

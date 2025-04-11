@@ -40,7 +40,7 @@ const SelectFilter = ({
 
                 <div id="industryContainer">
                     <h4>產業:</h4>
-                    <select className="" id="industry-s" value={selectedIndustry} onChange={(e) => setSelectedIndustry(e.target.value)}>
+                    <select className="select-bar" id="industry-s" value={selectedIndustry} onChange={(e) => setSelectedIndustry(e.target.value)}>
                         <option value="">所有產業</option>
                         {industry.map((industry) => (
                             <option key={industry.id} value={industry.id}>
@@ -51,7 +51,7 @@ const SelectFilter = ({
                 </div>
                 <div id="categoryContainer">
                     <h4>類別:</h4>
-                    <select className="" id="category-s" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+                    <select className="select-bar" id="category-s" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
                         <option value="">所有類別</option>
                         {categories.map((category) => (
                             <option key={category.id} value={category.id}>
@@ -61,10 +61,6 @@ const SelectFilter = ({
                     </select>
                 </div>
             </div>
-            {/* 更新圖示 (FontAwesome) */}
-            {/* <div className="refresh-container">
-                <FontAwesomeIcon icon={faRotateRight} />
-            </div> */}
         </>
     );
 };

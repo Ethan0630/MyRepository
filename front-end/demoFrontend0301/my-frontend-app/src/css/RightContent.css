@@ -42,3 +42,16 @@
         height: 480px;
     }
 }
+
+/* 手機頁面 */
+@media (max-width: 480px){
+    .right-content{
+        width: 80%;
+        margin-right: 5px;
+        height: 70%;
+    }
+    .top-green-bar{
+        width: 94%;
+        height: 15%;
+    }
+}

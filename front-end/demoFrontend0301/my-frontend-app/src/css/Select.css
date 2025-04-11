@@ -1,6 +1,6 @@
 #word {
     width: 100%;
-    font-size: 20px;
+    font-size: 24px;
     height: 20px;
     margin: 0 auto;
     margin-top: 10px;
@@ -15,7 +15,7 @@
     align-items: center;
     justify-content: center;
     /* 垂直置中 */
-    gap: 25px;
+    gap: 100px;
     /* 控制兩個選單的間距 */
     padding: 0 10px;
     /* width: 100%; */
@@ -25,48 +25,82 @@
     margin-right: 10px;
 }
 
-#industryContainer {
-    display: flex;
-    align-items: center;
-    /* margin-left: -15%; */
-    width: 55%;
-}
-
+#industryContainer,
 #categoryContainer {
     display: flex;
     align-items: center;
-    /* margin-left: -15%; */
     width: 55%;
+    gap:20px;
 }
 
-/* 更新按鈕 (refresh icon) */
-.refresh-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    background-color: rgb(11, 203, 104);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    margin-right: 10px;
-}
-
-/* 旋轉效果 */
-.refresh-container:hover {
-    transform: rotate(360deg);
-}
-
-/* 圖示設定 */
-/* .refresh-icon {
-    color: black;
+#industryContainer h4,
+#categoryContainer h4{
     font-size: 20px;
-} */
+}
 
 .filter-controls select {
-    font-size: 14px;
+    font-size: 16px;
     padding: 6px 10px;
     border-radius: 6px;
+}
+
+@media screen and (max-width: 992px){
+    #word{
+        font-size: 20px;
+    }
+
+    #industryContainer,
+    #categoryContainer {
+        gap:10px;
+    }
+
+    #industryContainer h4,
+    #categoryContainer h4{
+        font-size: 18px;
+    }
+
+    .filter-controls{
+        gap:25px;
+    }
+
+}
+/* 手機頁面 */
+@media (max-width: 480px){
+    #word {
+        font-size: 16px;
+        margin-top: 15px;
+        margin-bottom: 0;
+    }
+
+    #industryContainer h4,
+    #categoryContainer h4{
+        
+        font-size: 14px;
+    }
+
+    #industryContainer,
+    #categoryContainer{
+        width: 50%;
+        gap: 5px;
+    }
+
+    .filter-controls{
+        gap:6px;
+    }
+    .filter-controls select {
+        font-size: 10px;
+        padding: 6px 10px;
+        border-radius: 6px;
+    }
+
+    .select-bar {
+        font-size: 10px;       /* 縮小整體字型 */
+        line-height: 1;        /* 避免被撐高，可依需要微調 */
+        padding: 2px 4px;      /* 減少內距，讓外觀更小巧 */
+        width: auto;           /* 允許自動寬度或自行設定固定值 */
+        height: auto;          /* 有時候在某些瀏覽器得指定才能真正縮小 */
+      }
+    .select-bar option{
+        font-size: 8px;
+    }
 }

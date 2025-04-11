@@ -3,22 +3,28 @@
     /* 淺灰色背景 */
     border-radius: 10px;
     /* 圓角 */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     /* 添加陰影 */
-    border: 1px solid rgb(45, 26, 2);
+    /* border: 1px solid rgb(45, 26, 2); */
     margin-bottom: 15px;
-    max-height: 210px;
+    height: 210px;
     /* position: fixed; */
     /* 固定位置 */
     top: 0;
     /* 距離頁面頂部 0px */
     width: 90%;
     margin: 0 auto;
+    margin-top: 5px;
     /* 讓 div 水平置中 */
     overflow: hidden;
     /* ✅ 防止圖片超出 */
     padding: 3px;
     /* ✅ 添加內距，避免圖片緊貼邊框 */
+
+    /* 新增以下屬性使內容置中 */
+  display: flex;
+  justify-content: center;  /* 水平置中 */
+  align-items: center;      /* 垂直置中 */
 
 }
 
@@ -33,5 +39,16 @@
     .TopBox {
         height: 110px;
         /* 比較小的高度 */
+    }
+}
+
+/* 手機頁面 */
+@media (max-width: 480px){
+    .TopBox {
+        height: 100px;
+        /* 比較小的高度 */
+        width: 410px;
+
+        margin-top: 10px;
     }
 }

@@ -13,7 +13,7 @@ body,
 }
 
 #main-container {
-    width: 90%;
+    width: 95%;
     height: 600px;
     display: flex;
     margin: 0 auto;
@@ -53,13 +53,6 @@ body,
     border-radius: 8px;
 }
 
-/* 小螢幕時*/
-@media screen and (max-width: 992px) {
-    #left-container a {
-        font-size: 16px;
-    }
-}
-
 #pig-container {
     display: flex;
     justify-content: center;
@@ -68,13 +61,43 @@ body,
     /* 垂直置中 */
     height: 200px;
     /* 你可以根據需要調整高度 */
-    background-color: #f3e2e2;
+    background-color: #c5f2ff;
     /* 可以讓背景清楚區分 */
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
+    border-radius: 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+   
 
 }
 
 #pigImg {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain; /* 可選，確保圖片完整呈現 */
     cursor: pointer;
+}
+
+/* 小螢幕時*/
+@media screen and (max-width: 992px) {
+    #left-container a {
+        font-size: 16px;
+    }
+
+    #pig-container{
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px){
+    #left-container a {
+        font-size: 10px;
+    }
+
+    #pig-container{
+        height: 100px;
+    }
 }

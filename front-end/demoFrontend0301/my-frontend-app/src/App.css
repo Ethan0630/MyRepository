@@ -1,7 +1,11 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
@@ -44,31 +48,6 @@
   color: #888;
 }
 
-.box {
-  background: #f8f9fa;
-  /* 淺灰色背景 */
-  border-radius: 10px;
-  /* 圓角 */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  /* 添加陰影 */
-  border: 1px solid rgb(45, 26, 2);
-  margin-bottom: 15px;
-  height: 250px;
-  /* position: fixed; */
-  /* 固定位置 */
-  top: 0;
-  /* 距離頁面頂部 0px */
-  width: 90%;
-  margin: 0 auto;
-  /* 讓 div 水平置中 */
-
-  padding: 5px;
-  /* ✅ 添加內距，避免圖片緊貼邊框 */
-  height: auto;
-  /* ✅ 讓父容器隨圖片大小調整 */
-
-}
-
 
 /* 左側 30% 長條區塊 */
 .left-bar {
@@ -85,7 +64,7 @@
 
 /* 右側區塊的外框 */
 .right-content-wrapper {
-  width: 100%;
+  width: 90%;
   /* 右側佔 70% */
   margin-left: 2%;
 }
@@ -105,8 +84,36 @@
   margin-right: auto;
 }
 
+/* 小頁面 */
 @media screen and (max-width: 992px) {
   .left-bar {
     height: 610px;
+  }
+  .right-content-wrapper{
+    width: 86%;
+  }
+}
+
+/* 手機頁面 */
+@media (max-width: 480px){
+  .left-bar{
+   margin-left: 5px; 
+   height: 480px;
+  }
+
+  #mainContainer {
+    /* 若你想滿版，請設定 */
+    max-width: 100% !important; 
+    width: 100% !important;
+
+    /* 移除所有 margin */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+    /* 移除所有 padding */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
+    margin-top: 15px;
   }
 }

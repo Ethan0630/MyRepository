@@ -33,7 +33,7 @@
 }
 
 .profile-name {
-    font-size: 25px;
+    font-size: 28px;
     /* display: flex; */
     align-items: center;
     /* padding-left: 5%; */
@@ -46,10 +46,10 @@
     display: flex;
     align-items: center;
     /* 讓圖示和文字垂直置中 */
-    gap: 20px;
+    gap: 25px;
     /* 圖示與文字之間的間距 */
-    padding-left: 5%;
-    margin-left: 20%;
+    padding-left: 4%;
+    margin-left: 10%;
     font-size: 18px;
 }
 
@@ -57,11 +57,16 @@
     display: flex;
     align-items: center;
     /* 讓圖示和文字垂直置中 */
-    gap: 15px;
+    gap: 23px;
     /* 圖示與文字之間的間距 */
     padding-left: 5%;
-    margin-left: 19%;
+    margin-left: 7%;
     font-size: 18px;
+    margin-right: 10px;
+}
+
+#profile-sns{
+    gap: 20px;
 }
 
 /* 📱 小螢幕（小於 768px）時的樣式 */
@@ -70,29 +75,49 @@
     .profile {
         margin-left: 5px;
         font-size: 16px;
+        gap: 14px;
     }
 
     .education {
         margin-left: 3px;
+        margin-right: 3px;
         font-size: 16px;
+        gap: 8px;
+    }
+
+    #region{
+        gap: 16px;
+    }
+
+    #profile-sns{
+        gap: 11px;
     }
 }
 
+/* 手機螢幕 */
 @media (max-width: 480px) {
+
     .profile-name {
         font-size: 18px;
     }
 
     .profile {
         font-size: 12px;
-        margin-left: 5px;
-        gap: 5px;
+        margin-left: 14px;
+        gap: 8px;
     }
     
-    .education{
-        margin-left: 2px;
+    #profile-occupation p{
         font-size: 10px;
-        gap: 5px;
+    }
+    .education{
+        margin-left: 10px;
+        font-size: 10px;
+        gap: 6px;
+    }
+
+    #profile-sns a{
+        font-size: 10px;
     }
 }
 

@@ -47,33 +47,6 @@ body.modal-open {
     /* 讓圖片跟 `.square` 一樣圓角 */
 }
 
-
-/* 小螢幕時變 2 個一排 */
-@media screen and (max-width: 992px) {
-    .square {
-        width: calc(50% - 10px);
-        /* ✅ 讓它變成 2 個一排 */
-    }
-
-    .lightbox-content img {
-        min-width: 500px;
-    }
-
-    .lightbox-content {
-        min-width: 700px;
-    }
-}
-
-@media screen and (min-width: 993px) {
-    .lightbox-content {
-        min-width: 700px;
-    }
-
-    .lightbox-content img {
-        min-width: 500px;
-    }
-}
-
 .lightbox {
     position: fixed;
     top: 0;
@@ -127,8 +100,8 @@ body.modal-open {
 
 #des-box {
     width: 80%;
-    height: 150px;
-    background-color: antiquewhite;
+    height: auto;
+    background-color: rgb(239, 253, 214);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -178,3 +151,57 @@ body.modal-open {
     color: #a29898;
     cursor: pointer;
 }
+
+/* 大螢幕時 */
+@media screen and (min-width: 993px) {
+    .lightbox-content {
+        min-width: 700px;
+    }
+
+    .lightbox-content img {
+        min-width: 500px;
+    }
+}
+
+/* 小螢幕時*/
+@media screen and (max-width: 992px) {
+    .square {
+        width: calc(50% - 10px);
+        /* ✅ 讓它變成 2 個一排 */
+    }
+}
+
+@media (max-width: 768px){
+    .lightbox-content img {
+        width: 80%;
+        height: 100%;
+    }
+
+    .lightbox-close{
+        top: 10px;
+        right: 10px;
+    }
+
+    #des-box{
+        max-width: 80%;
+        min-width: 500px;
+    }
+}
+
+/* 手機頁面 */
+@media (max-width: 480px){
+    .lightbox-content img {
+        width: 300px;
+        height: 100%;
+    }
+
+    .lightbox-close{
+        display: none;
+    }
+    #des-box{
+        max-width: 300px;
+        min-width: 300px;
+    }
+}
+
+
