@@ -155,11 +155,16 @@ body.modal-open {
 /* 大螢幕時 */
 @media screen and (min-width: 993px) {
     .lightbox-content {
-        min-width: 700px;
+        min-width: 800px;
     }
 
     .lightbox-content img {
-        min-width: 500px;
+        min-width: 800px;
+    }
+
+    .lightbox-close{
+        top: 1%;
+        right: 7%;
     }
 }
 
@@ -171,6 +176,12 @@ body.modal-open {
     }
 }
 
+@media (min-width: 768px){
+    .lightbox-content img {
+        width: 80%;
+        height: 100%;
+    }
+}
 @media (max-width: 768px){
     .lightbox-content img {
         width: 80%;
