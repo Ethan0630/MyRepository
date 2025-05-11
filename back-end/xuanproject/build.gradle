@@ -39,6 +39,10 @@ dependencies {
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5' // JSON 序列化用
 	implementation 'org.springframework.security:spring-security-crypto:6.2.2'
 	implementation 'com.bucket4j:bucket4j-core:8.10.1'
+	implementation platform("software.amazon.awssdk:bom:2.25.0") // ✅ BOM 管理 AWS SDK 版本
+    implementation "software.amazon.awssdk:s3"
+    implementation "software.amazon.awssdk:auth"
+    implementation "software.amazon.awssdk:regions"
 
 
 }
