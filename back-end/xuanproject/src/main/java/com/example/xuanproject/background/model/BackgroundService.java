@@ -7,26 +7,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.xuanproject.S3.S3Service;
+
 @Service("backgroundService")
 public class BackgroundService {
 
     @Autowired
     private BackgroundRepository backgroundRepository;
 
-    public boolean saveBackImg(MultipartFile image) {
-        BackgroundVO backgroundVO;
-        if (!backgroundRepository.existsById(1)) {
-            backgroundVO = new BackgroundVO();
-        } else {
-            backgroundVO = backgroundRepository.findById(1).orElse(null);
-        }
+    @Autowired
+    private S3Service s3Service;
+
+    public boolean saveOrUpdateBackImg(MultipartFile file, String folder) {
+
+        backgroundRepository.deleteAll();
+
+        s3Service.deleteFolderObjects(folder);// 刪除整個資料夾的圖片
+
+        BackgroundVO backgroundVO = new BackgroundVO();
 
         try {
-            backgroundVO.setBackgroundImg(image.getBytes());
+            String url = s3Service.upload(
+                    folder,
+                    file.getOriginalFilename(),
+                    file.getInputStream(),
+                    file.getSize(),
+                    file.getContentType());
+            backgroundVO.setId(1);
+            backgroundVO.setBackgroundImg(url);
             backgroundRepository.save(backgroundVO);
             return true;
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -35,19 +46,11 @@ public class BackgroundService {
 
     public BackgroundVO getBackImg() {
 
-        BackgroundVO backgroundVO = backgroundRepository.findById(1).orElse(null);
-        Base64.Encoder encoder = Base64.getEncoder();
-
         if (backgroundRepository.existsById(1)) {
-
-            if (backgroundVO.getBackgroundImg() != null) {
-                String base64 = encoder.encodeToString(backgroundVO.getBackgroundImg());
-                backgroundVO.setBase64Img1("data:image/jpeg;base64," + base64);
-            }
-
+            return backgroundRepository.findById(1).get();
         }
 
-        return backgroundVO;
+        return null;
 
     }
 }

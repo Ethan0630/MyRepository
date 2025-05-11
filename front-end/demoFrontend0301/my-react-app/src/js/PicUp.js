@@ -6,7 +6,7 @@ export const uploadImage = async (selectedCategory, image, description) => {
         formData.append("image", image);
         formData.append("description", description);
 
-        const response = await fetch("http://13.115.110.126:9060/pic/upload", {
+        const response = await fetch("http://localhost:9060/pic/upload", {
             method: "POST",
             body: formData
         });

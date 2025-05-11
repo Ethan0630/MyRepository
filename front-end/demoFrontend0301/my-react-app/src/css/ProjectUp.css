@@ -226,3 +226,8 @@ button:hover {
     }
     
 }
+
+.required-star {
+    color: red;
+    margin-right: 4px;
+  }

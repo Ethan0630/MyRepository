@@ -1,3 +1,7 @@
+import Swal from 'sweetalert2';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../css/ProjectUp.css";
 import React, { useState, useEffect, useRef } from "react";
 import { updateProject, fetchProjectName, fetchProjectById, deleteProjectById } from "../js/ProjectUp"; // ✅ 正確匯入函數
@@ -19,21 +23,9 @@ const ProjectUpdate = () => {
     const [files, setFiles] = useState(Array(5).fill(null));   // 存放 5 個檔案的狀態
     const fileInputRefs = useRef([]); // 建立一個陣列來存放 input 參考
 
+    const [file1, setFile1] = useState(null);
+
     const navigate = useNavigate();
-
-    function base64ToFile(base64String, filename) {
-        const arr = base64String.split(",");
-        const mime = arr[0].match(/:(.*?);/)[1]; // e.g. image/jpeg
-        const bstr = atob(arr[1]); // base64 解碼
-        let n = bstr.length;
-        const u8arr = new Uint8Array(n);
-
-        while (n--) {
-            u8arr[n] = bstr.charCodeAt(n);
-        }
-
-        return new File([u8arr], filename, { type: mime });
-    }
 
     const getAllName = async () => {
         const data = await fetchProjectName();
@@ -62,23 +54,24 @@ const ProjectUpdate = () => {
             const data = await fetchProjectById(selectedId);
 
             const imageList = [
-                data.base64Img1,
-                data.base64Img2,
-                data.base64Img3,
-                data.base64Img4,
-                data.base64Img5
+                data.image1,
+                data.image2,
+                data.image3,
+                data.image4,
+                data.image5
             ];
             setImages(imageList);
 
-            const fileList = [
-                data.base64Img1 ? base64ToFile(data.base64Img1, "image1.jpg") : null,
-                data.base64Img2 ? base64ToFile(data.base64Img2, "image2.jpg") : null,
-                data.base64Img3 ? base64ToFile(data.base64Img3, "image3.jpg") : null,
-                data.base64Img4 ? base64ToFile(data.base64Img4, "image4.jpg") : null,
-                data.base64Img5 ? base64ToFile(data.base64Img5, "image5.jpg") : null
+            const promiseGetFIle = [
+                data.image1 ? urlToFile(data.image1, "image1.png") : null,
+                data.image2 ? urlToFile(data.image2, "image2.png") : null,
+                data.image3 ? urlToFile(data.image3, "image3.png") : null,
+                data.image4 ? urlToFile(data.image4, "image4.png") : null,
+                data.image5 ? urlToFile(data.image5, "image5.png") : null,
             ];
-            setFiles(fileList);
 
+            const fileList = await Promise.all(promiseGetFIle);
+            setFiles(fileList);
             setSelectedIndustry(data.industry);
             setSelectedCategory(data.category);
             setDescription(data.description);
@@ -89,19 +82,24 @@ const ProjectUpdate = () => {
         }
     }, [selectedId]);
 
+    const urlToFile = async (url, fileName) => {
+        const response = await fetch(url, { mode: "cors" }); // 👈 多加這行
+        const blob = await response.blob();
+        return new File([blob], fileName, { type: blob.type });
+    };
 
     // ✅ 更新作品
     const handleUpdateProject = async () => {
         setDescription(description.trim());
 
         if (!selectedIndustry || !selectedCategory || !description) {
-            alert("請填寫所有欄位");
+            Swal.fire("嗚嗚~豬寶!!!!", "請填寫所有欄位!", "warning");
             return;
         }
 
         // ✅ 檢查第一張圖片是否有檔案
         if (!files[0]) {
-            alert("請上傳封面圖片（第一張圖片為必填!）");
+            Swal.fire("嗚嗚~豬寶!!!!", "請上傳封面圖片（第一張圖片為必填!）!", "warning");
             return;
         }
 
@@ -113,11 +111,11 @@ const ProjectUpdate = () => {
             setDescription(""); // ✅ 正確清空
             setImages(Array(5).fill(null)); // ✅ 保持陣列結構
             setFiles(Array(5).fill(null));  // ✅ 清空檔案陣列
-            alert("作品更新成功！ :)");
+            Swal.fire("愛你豬萱寶", "更新成功!\n你好棒(胖)", "success");
         } else if (result === "unauthorized") {
             navigate("/"); // ✅ 直接跳回登入畫面
         } else {
-            alert("作品更新失敗，請稍後再試！\n或重新登入再試一次 :)");
+            Swal.fire("嗚嗚~豬寶!!!!", "作品更新失敗，請稍後再試！\n或重新登入再試一次QQ\n或聯絡夆夆", "warning");
         }
     };
 
@@ -167,29 +165,36 @@ const ProjectUpdate = () => {
     };
 
     const handleDeleteProject = async () => {
-        const isConfirmed = window.confirm("確定刪除?");
+        const confirm = await Swal.fire({
+            title: '確定要刪除嗎？',
+            text: '刪除後無法復原！',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '刪除',
+            cancelButtonText: '取消',
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+        });
 
-        if (isConfirmed) {
-            const result = await deleteProjectById(selectedId);
+        if (!confirm.isConfirmed) return;
 
-            if (result === "success") {
-                getAllName();
-                setSelectedId("");
-                setSelectedCategory(""); // ✅ 正確清空
-                setSelectedIndustry(""); // ✅ 正確清空
-                setDescription(""); // ✅ 正確清空
-                setImages(Array(5).fill(null)); // ✅ 保持陣列結構
-                setFiles(Array(5).fill(null));  // ✅ 清空檔案陣列
-                alert("作品刪除成功");
-            } else if (result === "unauthorized") {
-                navigate("/"); // ✅ 直接跳回登入畫面
-            } else {
-                alert("作品刪除失敗，請稍後再試！\n或重新登入再試一次");
-            }
+        const result = await deleteProjectById(selectedId);
 
+        if (result === "success") {
+            getAllName();
+            setSelectedId("");
+            setSelectedCategory(""); // ✅ 正確清空
+            setSelectedIndustry(""); // ✅ 正確清空
+            setDescription(""); // ✅ 正確清空
+            setImages(Array(5).fill(null)); // ✅ 保持陣列結構
+            setFiles(Array(5).fill(null));  // ✅ 清空檔案陣列
+            Swal.fire("愛你豬萱寶", "作品刪除成功!\n你好棒(胖)", "success");
+        } else if (result === "unauthorized") {
+            navigate("/"); // ✅ 直接跳回登入畫面
         } else {
-            return
+            Swal.fire("嗚嗚~豬寶!!", "作品刪除失敗，請稍後再試！\n或重新登入後再試一次\n或聯絡夆夆", "warning");
         }
+
     }
 
 
@@ -246,7 +251,7 @@ const ProjectUpdate = () => {
                         {Array.from({ length: 5 }).map((_, index) => (
                             <div key={index} className="image-block">
                                 <div id="title-container">
-                                    {images[index] && <i className="fa-solid fa-trash" onClick={() => handleDeleteImage(index)}></i>}
+                                    {images[index] && <FontAwesomeIcon icon={faTrash} className="trash" onClick={() => handleDeleteImage(index)} />}
                                 </div>
                                 <div
                                     key={index}

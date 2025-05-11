@@ -1,3 +1,6 @@
+import Swal from 'sweetalert2';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../css/ProjectUp.css";
 import React, { useState, useEffect, useRef } from "react";
 import { uploadProject } from "../js/ProjectUp"; // ✅ 正確匯入函數
@@ -38,13 +41,13 @@ const ImageUpload = () => {
         setDescription(description.trim());
 
         if (!selectedIndustry || !selectedCategory || !description) {
-            alert("請填寫所有欄位");
+            Swal.fire("嗚嗚~豬寶!!!!", "請填寫所有欄位!", "warning");
             return;
         }
 
         // ✅ 檢查第一張圖片是否有檔案
         if (!files[0]) {
-            alert("請上傳封面圖片（第一張圖片為必填!）");
+            Swal.fire("嗚嗚~豬寶!!!!", "請上傳封面圖片（第一張圖片為必填!）", "warning");
             return;
         }
 
@@ -56,11 +59,11 @@ const ImageUpload = () => {
             setDescription(""); // ✅ 正確清空
             setImages(Array(5).fill(null)); // ✅ 保持陣列結構
             setFiles(Array(5).fill(null));  // ✅ 清空檔案陣列
-            alert("作品新增成功！");
+            Swal.fire("愛你豬萱寶", "作品新增成功!\n你好棒(胖)", "success");
         } else if (result === "unauthorized") {
             navigate("/"); // ✅ 直接跳回登入畫面
         } else {
-            alert("作品新增失敗，請稍後再試!\n或重新登入再試一次");
+            Swal.fire("嗚嗚~豬寶!!!!", "作品新增失敗，請稍後再試!\n或聯絡夆夆", "warning");
         }
     };
 
@@ -119,7 +122,8 @@ const ImageUpload = () => {
 
             {/* 新增產業 */}
             <div id="addCategoryContainer">
-                <h3>作品名稱</h3>
+
+                <h3><span className='required-star'>*</span>作品名稱</h3>
                 <input
                     type="text"
                     id=""
@@ -131,7 +135,7 @@ const ImageUpload = () => {
             </div>
 
             <div id="industryListContainer">
-                <h3>選擇產業</h3>
+                <h3><span className='required-star'>*</span>選擇產業</h3>
                 <select id="industrySelect" value={selectedIndustry} onChange={(e) => setSelectedIndustry(e.target.value)}>
                     <option value="" disabled>請選擇產業</option>
                     {industry.map((industry) => (
@@ -143,7 +147,7 @@ const ImageUpload = () => {
             </div>
 
             <div id="categoryListContainer">
-                <h3>選擇類別</h3>
+                <h3><span className='required-star'>*</span>選擇類別</h3>
                 <select id="categorySelect" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
                     <option value="" disabled>請選擇類別</option>
                     {categories.map((category) => (
@@ -155,11 +159,11 @@ const ImageUpload = () => {
             </div>
 
             <div className="image-upload-container">
-                <h3>作品圖片</h3>
+                <h3><span className='required-star'>*</span>作品圖片</h3>
                 {Array.from({ length: 5 }).map((_, index) => (
                     <div key={index} className="image-block">
                         <div id="title-container">
-                            {images[index] && <i className="fa-solid fa-trash" onClick={() => handleDeleteImage(index)}></i>}
+                            {images[index] && <FontAwesomeIcon icon={faTrash} className="trash" onClick={() => handleDeleteImage(index)} />}
                         </div>
                         <div
                             key={index}
@@ -174,8 +178,10 @@ const ImageUpload = () => {
                                 <p>
                                     {index === 0 ? (
                                         <>
-                                            圖1 (封面，必填) <br />
-                                            拖曳圖片到這裡，或點擊上傳
+                                            <span className='required-star'>*
+                                                圖1 (封面，必填) <br />
+                                                拖曳圖片到這裡，或點擊上傳
+                                            </span>
                                         </>
                                     ) : (
                                         <>
@@ -199,7 +205,7 @@ const ImageUpload = () => {
             </div>
 
             <div className="descripttion-area">
-                <label htmlFor="description">敘述：</label>
+                <label htmlFor="description"><span className='required-star'>*</span>敘述：</label>
                 <textarea
                     id="description"
                     rows="3"

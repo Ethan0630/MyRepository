@@ -10,7 +10,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleLogin = async () => {
-        const response = await fetch("http://13.115.110.126:9060/member/loginCheck", {
+        const response = await fetch("http://localhost:9060/member/loginCheck", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -28,7 +28,7 @@ const Login = () => {
     };
 
     const generate = () => {
-        fetch("http://13.115.110.126:9060/member/generate")
+        fetch("http://localhost:9060/member/generate")
             .then(response => {
                 if (response.ok) {
                     alert("資料已產生！");

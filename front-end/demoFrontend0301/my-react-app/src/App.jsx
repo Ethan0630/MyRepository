@@ -19,7 +19,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://13.115.110.126:9060/pig/gif") // 請確認這是你的後端 URL
+    fetch("http://localhost:9060/pig/gif") // 請確認這是你的後端 URL
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -27,7 +27,7 @@ function App() {
         return response.json();
       })
       .then((data) => {
-        setGifData(data);
+        setGifData(data.pigGif);
       })
       .catch((error) => {
         console.error("載入 GIF 圖片失敗：", error);
@@ -44,7 +44,7 @@ function App() {
         {gifData && (
           <img
             id="pigImg"
-            src={gifData.base64img}
+            src={gifData}
             alt="Pig GIF"
             onClick={handleClick}
           />

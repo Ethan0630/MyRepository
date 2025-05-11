@@ -5,9 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,9 +20,8 @@ public class ProfileVO {
     @Column(name = "id", nullable = false, unique = true)
     private Integer id; // 自增主鍵
 
-    @Lob // 指定為 BLOB（Large Object）
-    @Column(name = "profile_pic", columnDefinition = "LONGBLOB")
-    private byte[] profilePic; // 存圖片（二進制 BLOB）
+    @Column(name = "profile_pic", length = 512)
+    private String profilePic; //
 
     @Column(name = "name", length = 100)
     private String name; // 姓名
@@ -44,8 +41,6 @@ public class ProfileVO {
     @Column(name = "sns", length = 255)
     private String sns; // sns link
 
-    @Transient // Hibernate 不會將此欄位映射到資料庫
-    private String base64Img;
 
     public ProfileVO(ProfileVO p) {
         this.name = p.name;

@@ -16,10 +16,10 @@ function App() {
 
   useEffect(() => {
     const getBackImg = async () => {
-      const response = await fetch("http://13.115.110.126:9060/background/getBackgroundImg");
+      const response = await fetch("http://localhost:9060/background/getBackgroundImg");
       const data = await response.json();
-      setBackgroundImg(data.base64Img1); // 👈 設定背景 base64
-      document.body.style.backgroundImage = `url(${data.base64Img1})`;
+      setBackgroundImg(data.backgroundImg); // 👈 設定背景 base64
+      document.body.style.backgroundImage = `url(${data.backgroundImg})`;
       document.body.style.backgroundSize = "cover";
       document.body.style.backgroundRepeat = "no-repeat";
       document.body.style.backgroundPosition = "center";

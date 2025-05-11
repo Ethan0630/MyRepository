@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import React, { useState, useEffect } from "react";
 import "../css/Profile.css";
 import { fetchProfile, uploadProfile } from "../js/Profile";
@@ -36,10 +37,10 @@ const ProfileComponent = () => {
             navigate("/"); // ✅ 直接跳回登入畫面
         } else if (result != null) {
             setProfile(result);
-            alert("更新完成! :)");
+            Swal.fire("愛你豬萱寶", "上傳成功!\n你好棒(胖)", "success"); 
             return;
         } else {
-            alert("操作失敗，請稍後再試! :(");
+            Swal.fire("嗚嗚~豬寶!!!!", "上傳失敗，請稍後再試！\n或聯絡夆夆", "warning");
         }
 
 

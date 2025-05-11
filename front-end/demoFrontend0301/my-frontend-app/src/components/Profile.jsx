@@ -17,7 +17,7 @@ const Profile = () => {
     useEffect(() => {
         const getProfile = async () => {
             const data = await fetchProfileImg();
-            setImage(data.base64Img);
+            setImage(data.profilePic);
             setName(data.name);
             setOccupation(data.occupation);
             setEducation(data.education);

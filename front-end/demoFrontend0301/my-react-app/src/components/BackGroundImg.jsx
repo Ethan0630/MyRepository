@@ -1,9 +1,10 @@
+import Swal from 'sweetalert2';
+import { faCloudArrowUp, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
-import { uploadBackImg, fetchBackImg } from "../js/BackGroundImg";
-import React, { useState, useRef, useEffect } from "react";
-import "../css/BackGroundImg.css"
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../css/BackGroundImg.css";
+import { fetchBackImg, uploadBackImg } from "../js/BackGroundImg";
 
 
 const backGroundImg = () => {
@@ -16,24 +17,26 @@ const backGroundImg = () => {
 
 
     useEffect(() => {
-        const getBackImg = async () => {
-            const data = await fetchBackImg();
-            setImage(data.base64Img1);
-            if (data.base64Img1) {
-                setImage(data.base64Img1); // 顯示
-                const blob = await fetch(data.base64Img1).then(r => r.blob());
-                const file = new File([blob], "backImg.jpg", { type: blob.type });
-                setFile(file); // ✅ 用來上傳
-            }
-        }
-
         getBackImg();
     }, []);
 
+    const getBackImg = async () => {
+        const data = await fetchBackImg();
+        setImage(data.backgroundImg);
+        console.log(data.backgroundImg);
+        const promiseGetFIle = data.backgroundImg ? urlToFile(data.backgroundImg, "background.png") : null;
+        setFile(await promiseGetFIle);
+    };
+    
     const handleDivClick = () => {
         fileInputRef.current.click(); // 讓 input 模擬被點擊
     };
 
+    const urlToFile = async (url, fileName) => {
+        const response = await fetch(url, { mode: "cors" }); // 👈 多加這行
+        const blob = await response.blob();
+        return new File([blob], fileName, { type: blob.type });
+    };
     // 📌 允許拖曳
     const handleDragOver = (e) => {
         e.preventDefault(); // 阻止預設行為，允許拖曳
@@ -74,17 +77,17 @@ const backGroundImg = () => {
 
     const handleUploadBackImg = async () => {
         if (!file) {
-            alert("請上傳背景圖");
+            Swal.fire("胖胖豬!!", "請上傳背景圖!", "warning"); 
             return
         }
         const result = await uploadBackImg(file);
 
         if (result === "success") {
-            alert("上傳成功");
+            Swal.fire("愛你豬萱寶", "上傳成功!\n你好棒(胖)", "success"); 
         } else if (result === "unauthorized") {
             navigate("/"); // ✅ 直接跳回登入畫面
         } else {
-            alert("上傳失敗，請稍後再試！");
+            Swal.fire("嗚嗚~豬寶!!!!", "上傳失敗，請稍後再試！\n或聯絡夆夆", "warning");
         }
     }
 
@@ -98,7 +101,7 @@ const backGroundImg = () => {
                     <h4>請選擇圖片</h4>
                 </div>
                 <div className="title-container">
-                    {image && <i className="fa-solid fa-trash" onClick={() => handleDeleteImage(setImage, setFile)}></i>}
+                    {image && <FontAwesomeIcon icon={faTrash} className="trash" onClick={() => handleDeleteImage(setImage, setFile)}/>}
                 </div>
                 <div id="backImg-container"
                     onClick={(() => handleDivClick(fileInputRef))}>

@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import "../css/IndustryUp.css";
 import React, { useState, useEffect } from "react"; // ✅ 確保有 `useEffect`
 import { fetchIndustry, uploadIndustry, deleteIndustry } from "../js/IndustryUp";
@@ -22,7 +23,7 @@ const IndustryComponent = () => {
     // ✅ 新增產業
     const handleUploadIndustry = async () => {
         if (!newIndustry) {
-            alert("請輸入產業名稱！");
+            Swal.fire("胖胖豬!!", "請輸入產業名稱!", "warning"); 
             return;
         }
 
@@ -31,11 +32,11 @@ const IndustryComponent = () => {
             const updatedIndustry = await fetchIndustry(); // ✅ 刪除成功後更新列表
             setIndustry(updatedIndustry);
             setNewIndustry(""); // ✅ 清空輸入框
-            alert("產業新增成功！:)");
+            Swal.fire("愛你豬萱寶", "產業新增成功!\n你好棒(胖)", "success"); 
         } else if (result === "unauthorized") {
             navigate("/"); // ✅ 直接跳回登入畫面
         } else {
-            alert("產業新增失敗，請稍後再試！\n或重新登入後再試一次 :(");
+            Swal.fire("嗚嗚~豬寶!!!!", "產業新增失敗，請稍後再試！\n或聯絡夆夆", "warning");
         }
 
 
@@ -44,12 +45,22 @@ const IndustryComponent = () => {
 
     const handleDeleteIndustry = async () => {
         if (!selectedIndustry) {
-            alert("請選擇要刪除的產業！");
+            Swal.fire("胖胖豬!!", "請選擇要刪除的產業!", "warning"); 
             return;
         }
 
-        const confirmDelete = window.confirm("確定要刪除嗎？");
-        if (!confirmDelete) return;
+        const confirm = await Swal.fire({
+            title: '確定要刪除嗎？',
+            text: '刪除後無法復原！',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '刪除',
+            cancelButtonText: '取消',
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+        });
+            
+        if (!confirm.isConfirmed) return;
 
         const result = await deleteIndustry(selectedIndustry); // ✅ 呼叫 API 刪除類別
 
@@ -57,11 +68,11 @@ const IndustryComponent = () => {
             const updatedIndustry = await fetchIndustry(); // ✅ 刪除成功後更新列表
             setIndustry(updatedIndustry);
             setSelectedIndustry(""); // ✅ 清空選擇
-            alert("產業刪除成功！:)");
+            Swal.fire("愛你豬萱寶", "產業刪除成功!\n你好棒(胖)", "success"); 
         } else if (result === "unauthorized") {
             navigate("/"); // ✅ 直接跳回登入畫面
         } else {
-            alert("產業刪除失敗，請稍後再試！\n或重新登入後再試一次 :(");
+            Swal.fire("嗚嗚~豬寶!!!!", "產業刪除失敗，請稍後再試！\n或重新登入後再試一次\n或聯絡夆夆", "warning");
         }
     };
 

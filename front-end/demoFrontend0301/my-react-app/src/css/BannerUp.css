@@ -58,7 +58,7 @@
     /* 禁止所有滑鼠事件 */
 }
 
-.title-container i {
+.trash {
     position: absolute;
     right: 5%;
     /* 讓 i 標籤固定在右側 */
@@ -69,6 +69,7 @@
     /* 讓鼠標變成可點擊 */
     font-size: 24px;
     /* 🔥 調整圖示大小，數值可自行修改 */
+    padding-bottom: 10px;
 }
 
 .img-container {

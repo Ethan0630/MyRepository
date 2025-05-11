@@ -18,8 +18,7 @@ export const uploadBanner = async (file1, file2, file3) => {
                 formData.append("banners", file); // <-- 多筆用相同 key
             }
         });
-
-        const response = await fetch("http://13.115.110.126:9060/admin/banner/upload", {
+        const response = await fetch("http://localhost:9060/admin/banner/upload", {
             method: "PUT",
             headers: {
                 // ✅ 關鍵：要帶上 token！

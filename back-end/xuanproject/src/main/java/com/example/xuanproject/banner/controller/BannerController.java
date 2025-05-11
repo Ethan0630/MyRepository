@@ -25,31 +25,6 @@ public class BannerController {
     @Autowired
     private BannerService bannerService;
 
-    @PutMapping("/admin/upload")
-    public BannerVO uploadBanner(
-            @RequestParam(value = "banners", required = false) List<MultipartFile> banners) {
-
-        BannerVO bannerVO = new BannerVO();
-        bannerVO.setId(1);
-
-        for (int i = 0; i < banners.size(); i++) {
-            if (banners.get(i) != null && !banners.get(i).isEmpty()) {
-                try {
-                    String fieldName = "banner" + (i + 1);
-                    Field field = BannerVO.class.getDeclaredField(fieldName);
-                    field.setAccessible(true);
-                    field.set(bannerVO, banners.get(i).getBytes());
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return bannerService.uploadBanner(bannerVO);
-
-    }
-
     @GetMapping("/getBanners")
     public List<String> getBanners() {
         return bannerService.getBanners();

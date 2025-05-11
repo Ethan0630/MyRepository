@@ -10,9 +10,11 @@ export const uploadBackImg = async (file) => {
 
     const formData = new FormData();
     formData.append("image", file);
+    formData.append("folder", "background");  // ✅ 加入資料夾名稱
 
 
-    const response = await fetch("http://13.115.110.126:9060/admin/backImg/upload", {
+
+    const response = await fetch("http://localhost:9060/admin/backImg/upload", {
         method: "POST",
         headers: {
             // ✅ 關鍵：要帶上 token！
@@ -30,6 +32,7 @@ export const uploadBackImg = async (file) => {
     if (!response.ok) {
         // 其他非 401 錯誤
         const text = await response.text(); // 避免 json() 出錯
+        console.log(text);
         return null;
     }
 
@@ -39,7 +42,7 @@ export const uploadBackImg = async (file) => {
 
 export const fetchBackImg = async () => {
 
-    const response = await fetch("http://13.115.110.126:9060/background/getBackgroundImg")
+    const response = await fetch("http://localhost:9060/background/getBackgroundImg")
     if (!response.ok) {
         throw new Error("獲取失敗！");
     }

@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import React, { useState, useEffect, useRef } from "react";
 import Croppie from "croppie";
 import "croppie/croppie.css"; // ✅ 匯入 Croppie 樣式
@@ -24,8 +25,8 @@ const ProfilePicComponent = () => {
         const file = e.target.files[0]; // 取得使用者選擇的檔案
         if (!file) return; // 如果沒有選擇檔案，直接返回
 
-        if (!file.type.startsWith("image")) { // 檢查是否為圖片
-            alert("請上傳圖片格式");
+        if (!file.type.startsWith("image")) {
+            Swal.fire("嗚嗚~豬寶!!!!", "請上傳圖片格式\n或是太胖了我裝不下QQ", "warning"); // 檢查是否為圖片
             return;
         }
 
@@ -101,11 +102,11 @@ const ProfilePicComponent = () => {
         const result = await uploadImage(imageBlob);
 
         if (result === "success") {
-            alert("上傳成功!")
+            Swal.fire("愛你豬萱寶", "上傳成功!\n你好棒(胖)", "success"); 
         } else if (result === "unauthorized") {
             navigate("/"); // ✅ 直接跳回登入畫面
         } else {
-            alert("上傳失敗，請稍後再試！");
+            Swal.fire("嗚嗚~豬寶!!!!", "上傳失敗，請稍後再試！\n或聯絡夆夆", "warning");
         }
 
     }

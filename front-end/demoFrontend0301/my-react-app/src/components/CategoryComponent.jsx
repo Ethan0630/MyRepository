@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import "../css/CategoryUp.css";
 import React, { useState, useEffect } from "react"; // ✅ 確保有 `useEffect`
 import { fetchCategories, uploadCategory, deleteCategory } from "../js/CategoryUp";
@@ -21,7 +22,7 @@ const CategoryManagement = () => {
     // ✅ 新增類別
     const handleUploadCategory = async () => {
         if (!newCategory) {
-            alert("請輸入類別名稱！");
+            Swal.fire("胖胖豬!!", "你忘記輸入類別名稱！!", "warning"); 
             return;
         }
 
@@ -30,22 +31,32 @@ const CategoryManagement = () => {
             const updatedCategories = await fetchCategories(); // ✅ 刪除成功後更新列表
             setCategories(updatedCategories);
             setNewCategory(""); // ✅ 清空輸入框
-            alert("類別新增成功！ :))");
+            Swal.fire("愛你豬萱寶", "類別新增成功！!\n你好棒(胖)", "success"); 
         } else if (result === "unauthorized") {
             navigate("/"); // ✅ 直接跳回登入畫面
         } else {
-            alert("類別新增失敗，請稍後再試！\n或重新登入後再試一次 :(");
+            Swal.fire("嗚嗚~豬寶!!!!", "類別新增失敗，請稍後再試！\n或聯絡夆夆", "warning");
         }
     };
 
     const handleDeleteCategory = async () => {
         if (!selectedCategory) {
-            alert("請選擇要刪除的類別！");
+            Swal.fire("胖胖豬!!", "請選擇要刪除的類別!", "warning"); 
             return;
         }
 
-        const confirmDelete = window.confirm("確定要刪除嗎？");
-        if (!confirmDelete) return;
+        const confirm = await Swal.fire({
+            title: '確定要刪除嗎？',
+            text: '刪除後無法復原！',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '刪除',
+            cancelButtonText: '取消',
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+        });
+    
+        if (!confirm.isConfirmed) return;
 
         const result = await deleteCategory(selectedCategory); // ✅ 呼叫 API 刪除類別
 
@@ -53,11 +64,11 @@ const CategoryManagement = () => {
             const updatedCategories = await fetchCategories(); // ✅ 刪除成功後更新列表
             setCategories(updatedCategories);
             setSelectedCategory(""); // ✅ 清空選擇
-            alert("類別刪除成功！ :)");
+            Swal.fire("愛你豬萱寶", "類別刪除成功!\n你好棒(胖)", "success"); 
         } else if (result === "unauthorized") {
             navigate("/"); // ✅ 直接跳回登入畫面
         } else {
-            alert("類別刪除失敗，請稍後再試！\n或重新登入後再試一次 :(");
+            Swal.fire("嗚嗚~豬寶!!!!", "上傳失敗，請稍後再試！\n或聯絡夆夆", "warning");
         }
     };
 

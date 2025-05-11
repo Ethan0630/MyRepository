@@ -63,7 +63,7 @@ const ProjectList = ({ industryId, categoryId }) => {
         };
 
         fetchProjects();
-    }, []); // ✅ 每次只要 id 有變就會重新查詢
+    }, []);
 
 
     useEffect(() => {
@@ -88,11 +88,11 @@ const ProjectList = ({ industryId, categoryId }) => {
 
     const handleLishtBox = async (project) => {
         const images = [
-            project.base64Img1,
-            project.base64Img2,
-            project.base64Img3,
-            project.base64Img4,
-            project.base64Img5
+            project.image1,
+            project.image2,
+            project.image3,
+            project.image4,
+            project.image5
         ].filter(img => img !== null); // ✅ 過濾掉 null 的圖
 
         setDescription(project.description);
@@ -123,7 +123,7 @@ const ProjectList = ({ industryId, categoryId }) => {
             <div className="square-container">
                 {currentProjects.map((project) => (
                     <div key={project.id} className="square" onClick={() => handleLishtBox(project)}>
-                        <img src={project.base64Img1} alt={"查無此照片"}></img>
+                        <img src={project.image1} alt={"查無此照片"}></img>
                     </div>
                 ))}
             </div>

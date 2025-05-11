@@ -13,14 +13,9 @@ import lombok.AllArgsConstructor;
 public class BackgroundVO {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增主鍵
     private Integer id;
 
-    @Lob
-    @Column(name = "background_img", columnDefinition = "LONGBLOB", nullable = false) // 類別，不可為 NULL
-    private byte[] backgroundImg;
-
-    @Transient // Hibernate 不會將此欄位映射到資料庫
-    private String base64Img1;
+    @Column(name = "background_img",  length = 512) // 類別，不可為 NULL
+    private String backgroundImg;
 
 }

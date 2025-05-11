@@ -1,5 +1,7 @@
+import Swal from 'sweetalert2';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import React, { useState, useRef, useEffect } from "react";
 import "../css/BannerUp.css";
 import { uploadBanner } from "../js/BannerUp.js";
@@ -21,39 +23,54 @@ const BannerUpComponent = () => {
     const fileInputRef1 = useRef(null);
     const fileInputRef2 = useRef(null);
     const fileInputRef3 = useRef(null);
-
+    
     useEffect(() => {
+        // console.log("Component mounted");
         fetchBanners();
     }, []);
 
+    useEffect(() => {
+        console.log(file1);
+    }, [file1]);
+    useEffect(() => {
+        console.log(file2);
+    }, [file2]);
+    useEffect(() => {
+        console.log(file3);
+    }, [file3]);
+
+
+
+
     const fetchBanners = async () => {
         try {
-            const response = await fetch("http://13.115.110.126:9060/banner/getBanners");
+            const response = await fetch("http://localhost:9060/banner/getBanners");
             const data = await response.json();
 
-            if (Array.isArray(data)) {
-                setImage1(data[0] || null);
-                setImage2(data[1] || null);
-                setImage3(data[2] || null);
+            setImage1(data[0] || null);
+            setImage2(data[1] || null);
+            setImage3(data[2] || null);
+            
+            const promiseGetFIle = [
+                data[0] ? urlToFile(data[0], "banner1.png") : null, 
+                data[1] ? urlToFile(data[1], "banner2.png") : null, 
+                data[2] ? urlToFile(data[2], "banner3.png") : null]; // urlToFile(data[0], "banner1.png")
+            setFile1(await promiseGetFIle[0]);
+            setFile2(await promiseGetFIle[1]);
+            setFile3(await promiseGetFIle[2]);
+            
 
-                // 🔹 將 Base64 轉回 File（保持與 File Input 一致）
-                if (data[0]) {
-                    const file = await base64ToFile(data[0], "banner1.png");
-                    setFile1(file);
-                }
-                if (data[1]) {
-                    const file = await base64ToFile(data[1], "banner2.png");
-                    setFile2(file);
-                }
-                if (data[2]) {
-                    const file = await base64ToFile(data[2], "banner3.png");
-                    setFile3(file);
-                }
-            }
         } catch (error) {
             console.error("取得 Banner 失敗:", error);
         }
     };
+
+    const urlToFile = async (url, fileName) => {
+        const response = await fetch(url, { mode: "cors" }); // 👈 多加這行
+        const blob = await response.blob();
+        return new File([blob], fileName, { type: blob.type });
+    };
+    
 
     // 📌 **處理 input 變更**
     const handleFileChange = (e, setImage, setFile) => {
@@ -104,27 +121,22 @@ const BannerUpComponent = () => {
     };
 
     const handleUploadBanner = async () => {
+        console.log(file1, file2, file3);
         if (!file1 && !file2 && !file3) {
-            alert("至少要一張banner!");
+            Swal.fire("嗚嗚~豬寶!!!!", "至少要一張banner!", "warning"); 
             return
         }
         const result = await uploadBanner(file1, file2, file3);
 
         if (result === "success") {
             fetchBanners();
-            alert("上傳成功");
+            Swal.fire("愛你豬萱寶", "上傳成功!", "success"); 
         } else if (result === "unauthorized") {
             navigate("/"); // ✅ 直接跳回登入畫面
         } else {
-            alert("上傳失敗，請稍後再試！\n或重新登入再試一次");
+            Swal.fire("嗚嗚~豬寶!!!!", "上傳失敗，請稍後再試！\n或重新登入再試一次\n或聯絡夆夆", "warning"); 
         }
     }
-
-    const base64ToFile = async (base64String, fileName) => {
-        const res = await fetch(base64String);
-        const blob = await res.blob();
-        return new File([blob], fileName, { type: blob.type });
-    };
 
 
     return (
@@ -132,8 +144,7 @@ const BannerUpComponent = () => {
             < div className="drop-area">
                 <div className="title-container">
                     <h2>Banner 1 </h2>
-                    {image1 && <i className="fa-solid fa-trash" onClick={() => handleDeleteImage(setImage1, setFile1)}></i>}
-
+                    {image1 &&  <FontAwesomeIcon icon={faTrash} className="trash" onClick={() => handleDeleteImage(setImage1, setFile1)}/>}
                 </div>
                 <div className={`img-container ${image1 ? "has-image" : ""}`}
                     onClick={() => handleDivClick(fileInputRef1)}
@@ -156,7 +167,7 @@ const BannerUpComponent = () => {
             < div className="drop-area" >
                 <div className="title-container">
                     <h2>Banner 2 </h2>
-                    {image2 && <i className="fa-solid fa-trash" onClick={() => handleDeleteImage(setImage2, setFile2)}></i>}
+                    {image2 && <FontAwesomeIcon icon={faTrash} className="trash" onClick={() => handleDeleteImage(setImage2, setFile2)}/>}
                 </div>
 
                 <div className={`img-container ${image2 ? "has-image" : ""}`}
@@ -180,7 +191,7 @@ const BannerUpComponent = () => {
             < div className="drop-area">
                 <div className="title-container">
                     <h2>Banner 3 </h2>
-                    {image3 && <i className="fa-solid fa-trash" onClick={() => handleDeleteImage(setImage3, setFile3)}></i>}
+                    {image3 && <FontAwesomeIcon icon={faTrash} className="trash" onClick={() => handleDeleteImage(setImage3, setFile3)}/>}
 
                 </div>
                 <div className={`img-container ${image3 ? "has-image" : ""}`}

@@ -2,14 +2,13 @@ package com.example.xuanproject.admin;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,13 +20,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.xuanproject.background.model.BackgroundService;
 import com.example.xuanproject.banner.model.BannerService;
-import com.example.xuanproject.banner.model.BannerVO;
 import com.example.xuanproject.category.model.CategoryService;
 import com.example.xuanproject.category.model.CategoryVO;
 import com.example.xuanproject.industry.model.IndustryService;
 import com.example.xuanproject.industry.model.IndustryVO;
 import com.example.xuanproject.profile.model.ProfileService;
 import com.example.xuanproject.profile.model.ProfileVO;
+import com.example.xuanproject.project.dto.ProjectApiDTO;
 import com.example.xuanproject.project.model.ProjectService;
 import com.example.xuanproject.project.model.ProjectVO;
 
@@ -53,23 +52,13 @@ public class AdminController {
     @Autowired
     private CategoryService categoryService;
 
-    @PutMapping("/profile/uploadImg") // 更新大頭貼
-    public ResponseEntity<Map<String, String>> uploadImg(@RequestParam("image") MultipartFile image) {
-        boolean result = false;
-        try {
-            result = profileService.saveOrUpdateProfileImage(image.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        Map<String, String> response = new HashMap<>();
-        if (result) {
-            response.put("message", "更新成功");
-            return ResponseEntity.ok(response); // ✅ 返回 JSON
-        } else {
-            response.put("message", "更新失敗，請稍後再試");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
+    @PutMapping("/profile/uploadImg") // 更新大頭貼
+    public boolean uploadProfileImg(
+            @RequestParam("image") MultipartFile file,
+            @RequestParam("folder") String folder) {
+
+            return profileService.saveOrUpdateProfileImage(file, folder);
     }
 
     @PutMapping("/profile/uploadProfile") // 編輯個人資料
@@ -78,123 +67,36 @@ public class AdminController {
     }
 
     @PostMapping("/backImg/upload") // 背景圖片管理
-    public ResponseEntity<String> uploadBackGroundImg(@RequestParam("image") MultipartFile image) {
+    public boolean uploadBackGroundImg(
+            @RequestParam("image") MultipartFile file,
+            @RequestParam("folder") String folder) {
 
-        if (backgroundService.saveBackImg(image)) {
-            return ResponseEntity.ok("上傳成功！");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("上傳失敗"); // 404 Not Found
-        }
+        return backgroundService.saveOrUpdateBackImg(file, folder);
+       
     }
 
-    @PutMapping("/banner/upload") // 更新Banner，圖票太大會無法觸發401導向登入
-    public BannerVO uploadBanner(
+    @PutMapping("/banner/upload") // 更新Banner，圖片太大會無法觸發401導向登入
+    public boolean uploadBanner(
             @RequestParam(value = "banners", required = false) List<MultipartFile> banners) {
+            
 
-        BannerVO bannerVO = new BannerVO();
-        bannerVO.setId(1);
-
-        for (int i = 0; i < banners.size(); i++) {
-            if (banners.get(i) != null && !banners.get(i).isEmpty()) {
-                try {
-                    String fieldName = "banner" + (i + 1);
-                    Field field = BannerVO.class.getDeclaredField(fieldName);
-                    field.setAccessible(true);
-                    field.set(bannerVO, banners.get(i).getBytes());
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return bannerService.uploadBanner(bannerVO);
+        return bannerService.uploadBanner(banners, "banner");
 
     }
 
     @PostMapping("/project/upload") // 上傳作品
-    public ResponseEntity<String> uploadProject(
-            @RequestParam("name") String name,
-            @RequestParam("industry") int industry,
-            @RequestParam("category") int category,
-            @RequestParam("images") List<MultipartFile> images,
-            @RequestParam("description") String description) {
+    public boolean uploadProject(@ModelAttribute ProjectApiDTO projectApiDTO) {
 
-        ProjectVO project = new ProjectVO();
-        project.setName(name);
-        project.setIndustry(industry);
-        project.setCategory(category);
-        project.setDescription(description);
-
-        System.out.println("===========");
-        for (int i = 0; i < images.size(); i++) {
-            if (images.get(i) != null && !images.get(i).isEmpty()) { // ✅ 確保檔案有效
-                try {
-                    String fieldName = "image" + (i + 1); // 生成 image1, image2, ..., image5
-                    Field field = ProjectVO.class.getDeclaredField(fieldName);
-                    field.setAccessible(true);
-                    field.set(project, images.get(i).getBytes()); // ✅ 正確
-                } catch (NoSuchFieldException | IllegalAccessException | IOException e) {
-                    e.printStackTrace();
-                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                            .body("上傳失敗：" + e.getMessage());
-                }
-            }
-        }
-
-        if (projectService.savePic(project)) {
-            return ResponseEntity.ok("上傳成功！");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("上傳失敗"); // 404 Not Found
-        }
+    
+        return projectService.saveProject(projectApiDTO, "project");
 
     }
 
     @PutMapping("/project/update") // 更新作品
-    public ResponseEntity<String> updateProject(
-            @RequestParam("id") int id,
-            @RequestParam("industry") int industry,
-            @RequestParam("category") int category,
-            @RequestParam("images") List<MultipartFile> images,
-            @RequestParam("description") String description) {
+    public boolean updateProject(@ModelAttribute ProjectApiDTO projectApiDTO) {
 
-        ProjectVO project = projectService.getProjectById(id);
-        project.setIndustry(industry);
-        project.setCategory(category);
-        project.setDescription(description);
-
-        for (int j = 0; j < 5; j++) {
-            try {
-                String fieldNameD = "image" + (j + 1);
-                Field fieldD = ProjectVO.class.getDeclaredField(fieldNameD);
-                fieldD.setAccessible(true);
-                fieldD.set(project, null);
-            } catch (NoSuchFieldException | IllegalAccessException e) {
-                e.printStackTrace();
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body("清空圖片失敗：" + e.getMessage());
-            }
-        }
-        for (int i = 0; i < images.size(); i++) {
-            if (images.get(i) != null && !images.get(i).isEmpty()) { // ✅ 確保檔案有效
-                try {
-                    String fieldName = "image" + (i + 1); // 生成 image1, image2, ..., image5
-                    Field field = ProjectVO.class.getDeclaredField(fieldName);
-                    field.setAccessible(true);
-                    field.set(project, images.get(i).getBytes()); // ✅ 正確
-                } catch (NoSuchFieldException | IllegalAccessException | IOException e) {
-                    e.printStackTrace();
-                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                            .body("上傳失敗：" + e.getMessage());
-                }
-            }
-        }
-
-        if (projectService.savePic(project)) {
-            return ResponseEntity.ok("上傳成功！");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("上傳失敗"); // 404 Not Found
-        }
+       
+        return projectService.updateProject(projectApiDTO, "project");
 
     }
 

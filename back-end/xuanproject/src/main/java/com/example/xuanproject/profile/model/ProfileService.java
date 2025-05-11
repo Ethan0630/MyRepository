@@ -1,10 +1,12 @@
 package com.example.xuanproject.profile.model;
 
-import java.util.Base64;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.example.xuanproject.S3.S3Service;
 
 @Service("ProfileService")
 public class ProfileService {
@@ -12,46 +14,54 @@ public class ProfileService {
     @Autowired
     private ProfileRepository profileRepository;
 
-    public boolean saveOrUpdateProfileImage(byte[] profilePic) {
+    @Autowired
+    private S3Service s3Service;
 
-        Optional<ProfileVO> existingProfile = profileRepository.findById(1);
+    public boolean saveOrUpdateProfileImage(MultipartFile file, String folder) {
+
         ProfileVO profile;
 
-        if (existingProfile.isPresent()) {
-            profile = existingProfile.get();
+        if (profileRepository.existsById(1)) {
+
+            profile = profileRepository.findById(1).get();
+
+            if (profile.getProfilePic() != null) {
+                s3Service.deleteFolderObjects("profileImg");// 刪除整個資料夾的圖片
+            }
         } else {
             profile = new ProfileVO();
         }
 
-        profile.setProfilePic(profilePic);
-        profileRepository.save(profile);
+        try {
+            String url = s3Service.upload(
+                    folder,
+                    file.getOriginalFilename(),
+                    file.getInputStream(),
+                    file.getSize(),
+                    file.getContentType());
 
-        if (profileRepository.count() == 1) {
+            profile.setProfilePic(url);
+            profileRepository.save(profile);
             return true;
-        } else {
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
+
     }
 
     public ProfileVO getProfile() {
-        Optional<ProfileVO> existingProfile = profileRepository.findById(1);
+
         // 如果資料庫沒有這個 Profile，則回傳一個新的 ProfileVO 物件
-        ProfileVO profile = existingProfile.orElse(new ProfileVO());
-
-        if (profile.getProfilePic() != null) {
-            profile.setBase64Img(
-                    ("data:image/png;base64," + Base64.getEncoder().encodeToString(profile.getProfilePic())));
-        }
-
-        return profile;
+        return profileRepository.existsById(1) ? profileRepository.findById(1).get() : new ProfileVO();
     }
 
     public ProfileVO saveOrUpdateProfile(ProfileVO p) {
-        Optional<ProfileVO> existingProfile = profileRepository.findById(1);
+
         ProfileVO profile;
 
-        if (existingProfile.isPresent()) { // 可能有照片
-            profile = existingProfile.get();
+        if (profileRepository.existsById(1)) { // 可能有照片
+            profile = profileRepository.findById(1).get();
             profile.setName(p.getName());
             profile.setOccupation(p.getOccupation());
             profile.setEducation(p.getEducation());
