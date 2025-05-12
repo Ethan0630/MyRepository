@@ -55,10 +55,9 @@ public class AdminController {
 
     @PutMapping("/profile/uploadImg") // 更新大頭貼
     public boolean uploadProfileImg(
-            @RequestParam("image") MultipartFile file,
-            @RequestParam("folder") String folder) {
+            @RequestParam("image") MultipartFile file) {
 
-            return profileService.saveOrUpdateProfileImage(file, folder);
+            return profileService.saveOrUpdateProfileImage(file, "profileImg");
     }
 
     @PutMapping("/profile/uploadProfile") // 編輯個人資料

@@ -18,7 +18,7 @@ public class PigImgController {
 
         var PigImgDTO = new PigImgDTO();
 
-        PigImgDTO.setPigGif("https://xuan-project-2025.s3.ap-northeast-1.amazonaws.com/project/S__36757508.gif");
+        PigImgDTO.setPigGif("https://xuan-project-pic.s3.ap-northeast-1.amazonaws.com/image/S__36757508.gif");
 
         return PigImgDTO;
     }
