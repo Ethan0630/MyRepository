@@ -68,10 +68,9 @@ public class AdminController {
 
     @PostMapping("/backImg/upload") // 背景圖片管理
     public boolean uploadBackGroundImg(
-            @RequestParam("image") MultipartFile file,
-            @RequestParam("folder") String folder) {
+            @RequestParam("image") MultipartFile file) {
 
-        return backgroundService.saveOrUpdateBackImg(file, folder);
+        return backgroundService.saveOrUpdateBackImg(file, "background");
        
     }
 

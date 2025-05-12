@@ -10,9 +10,6 @@ export const uploadBackImg = async (file) => {
 
     const formData = new FormData();
     formData.append("image", file);
-    formData.append("folder", "background");  // ✅ 加入資料夾名稱
-
-
 
     const response = await fetch("http://localhost:9060/admin/backImg/upload", {
         method: "POST",
